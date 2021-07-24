@@ -37,6 +37,13 @@ class Devedor (models.Model):
                                              ('NÃO ATUAR', 'NÃO ATUAR'),
                                              ))
     user_agent = models.CharField('NEGOCIADOR', max_length=50, blank=False)
+    cpc_status = models.CharField(max_length=20, blank=False, default='SIM',
+                                   choices=(('SIM', 'SIM'),
+                                    ('NÃO', 'NÃO')
+                                    ))
+    data_registro = models.DateTimeField(auto_now_add=True)
+    data_alteracao = models.DateTimeField(auto_now=True)
+    observacoes_status = models.TextField('Observações', max_length=500, blank=True)
 
     cpc_status = models.CharField(max_length=20, blank=False, default='SIM',
                                    choices=(('SIM', 'SIM'),
@@ -47,7 +54,10 @@ class Devedor (models.Model):
     observacoes_status = models.TextField('Observações', max_length=500, blank=True)
 
 
+    def __str__(self):
+        return self.title
 
-
-
+    class Meta:
+        db_table = 'cadastro'
+        ordering = ('id',)
 
